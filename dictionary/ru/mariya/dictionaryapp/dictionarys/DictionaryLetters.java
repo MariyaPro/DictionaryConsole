@@ -16,5 +16,4 @@ public class DictionaryLetters extends DictionaryFile {
         }
         return true;
     }
-
 }

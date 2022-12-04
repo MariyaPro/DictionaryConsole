@@ -22,6 +22,7 @@ public class ConsoleDictionaryApp {
 
         try {
             while (true) {
+                ConsoleHelper.writeMenu();
                 Command command = ConsoleHelper.getCommand();
                 command.execute();
             }
@@ -41,7 +42,6 @@ public class ConsoleDictionaryApp {
         } catch (IOException e) {
             ConsoleHelper.writeMessage("Не найден файл pathDictionarysFilesSource");
         }
-
         dictionaryList.add(new DictionaryLetters(Paths.get(properties.getProperty("dictionaryLetters"))));
         dictionaryList.add(new DictionaryNumbers(Paths.get(properties.getProperty("dictionaryNumbers"))));
     }

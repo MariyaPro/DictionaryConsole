@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -18,7 +17,6 @@ public class DictionaryFile {
 
     public DictionaryFile(Path dictionarySource) {
         this.dictionarySource = dictionarySource;
-
     }
 
     public void loadFromFile() {
@@ -29,13 +27,11 @@ public class DictionaryFile {
                 String[] words = line.split(" ", 2);
                 putWord(words[0], words[1]);
             } while (br.ready());
-
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 
@@ -48,12 +44,12 @@ public class DictionaryFile {
     }
 
     public void removeWord(String word) {
-        if(!map.containsKey(word)) map.remove(word);
+        if (!map.containsKey(word)) map.remove(word);
         else ConsoleHelper.writeMessage("Такого слова нет в словаре.");
     }
 
     public void readDictionary() {
-        for(Map.Entry entry : map.entrySet()){
+        for (Map.Entry entry : map.entrySet()) {
             ConsoleHelper.writeMessage(entry.toString());
         }
     }
@@ -65,6 +61,4 @@ public class DictionaryFile {
     public boolean isValidWord(String word) {
         return false;
     }
-
-
 }
