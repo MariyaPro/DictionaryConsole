@@ -43,9 +43,10 @@ public class DictionaryFile {
         if (isValidWord(word)) map.put(word, translation);
     }
 
-    public void removeWord(String word) {
-        if (!map.containsKey(word)) map.remove(word);
-        else ConsoleHelper.writeMessage("Такого слова нет в словаре.");
+    public boolean removeWord(String word) {
+        boolean find = map.containsKey(word);
+        if (find) map.remove(word);
+        return find;
     }
 
     public void readDictionary() {

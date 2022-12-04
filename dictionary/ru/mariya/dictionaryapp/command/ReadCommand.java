@@ -10,6 +10,6 @@ public class ReadCommand implements Command{
     @Override
     public void execute() {
         List<DictionaryFile> list = ConsoleDictionaryApp.getDictionaryList();
-
+        list.forEach(DictionaryFile::readDictionary);
     }
 }
