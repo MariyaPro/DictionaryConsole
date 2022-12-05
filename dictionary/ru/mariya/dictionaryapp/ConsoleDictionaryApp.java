@@ -27,6 +27,7 @@ public class ConsoleDictionaryApp {
                 if (command == null) ConsoleHelper.writeMessage("Некорректный ввод. Попробуйте еще раз.");
             } while (command == null);
             command.execute();
+            ConsoleHelper.writeMessage("");
         } while (!command.getClass().getSimpleName().equalsIgnoreCase("ExitCommand"));
 
     }

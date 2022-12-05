@@ -20,6 +20,6 @@ public class GetCommand implements Command {
             if (translation != null)
                 break;
         }
-        ConsoleHelper.writeMessage(translation == null ? "Слово не найдено в словаре" : translation);
+        ConsoleHelper.writeMessage(translation == null ? "Слово не найдено в словаре." : translation);
     }
 }
