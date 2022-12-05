@@ -19,20 +19,15 @@ public class ConsoleDictionaryApp {
         setDictionaryList();
         loadDictionary();
 
-
-        try {
-            while (true) {
-                ConsoleHelper.writeMenu();
-                Command command;
-                do {
-                    command = ConsoleHelper.getCommand();
-                    if(command==null) ConsoleHelper.writeMessage("Некорректный ввод. Попробуйте еще раз.");
-                } while (command == null);
-                command.execute();
-            }
-        } catch (ExitException e) {
-            ConsoleHelper.writeMessage("End");
-        }
+        Command command;
+        do {
+            ConsoleHelper.writeMenu();
+            do {
+                command = ConsoleHelper.getCommand();
+                if (command == null) ConsoleHelper.writeMessage("Некорректный ввод. Попробуйте еще раз.");
+            } while (command == null);
+            command.execute();
+        } while (!command.getClass().getSimpleName().equalsIgnoreCase("ExitCommand"));
 
     }
 
@@ -41,7 +36,7 @@ public class ConsoleDictionaryApp {
         Properties properties = new Properties();
         try {
             properties.load(new FileReader("C:\\Users\\Мария\\IdeaProjects\\DictionaryConsole\\dictionary\\ru\\mariya\\dictionaryapp\\pathDictionariesFilesSource"));
-            // properties.load(new FileReader(ConsoleDictionaryApp.class.getCanonicalName().replaceAll("\\.","\\")+"\\pathDictionariesFilesSourse"));
+            // properties.load(new FileReader(ConsoleDictionaryApp.class.getCanonicalName().replaceAll("\\.","\\")+"\\pathDictionariesFilesSource"));
 
         } catch (IOException e) {
             ConsoleHelper.writeMessage("Не найден файл pathDictionariesFilesSource");

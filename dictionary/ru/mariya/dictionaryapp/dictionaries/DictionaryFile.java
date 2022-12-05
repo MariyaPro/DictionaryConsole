@@ -1,19 +1,20 @@
 package ru.mariya.dictionaryapp.dictionaries;
 
+import org.jetbrains.annotations.NotNull;
 import ru.mariya.dictionaryapp.ConsoleHelper;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class DictionaryFile {
-    private Path dictionarySource;
-    private Map<String, String> map = new TreeMap<>();
-
+    private final Path dictionarySource;
+    private final Map<String, String> map = new TreeMap<>();
+    private boolean isModified = false;
 
     public DictionaryFile(Path dictionarySource) {
         this.dictionarySource = dictionarySource;
@@ -22,40 +23,41 @@ public class DictionaryFile {
     public void loadFromFile() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(dictionarySource.toFile()));
-            do {
+            while (br.ready()) {
                 String line = br.readLine();
                 String[] words = line.split(" ", 2);
-                putWord(words[0], words[1]);
-            } while (br.ready());
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+                map.put(words[0], words[1]);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-
-    public Map<String, String> getMap() {
-        return map;
+    public boolean isModified() {
+        return isModified;
     }
 
     public boolean putWord(String word, String translation) {
         boolean isValid = false;
         if (isValidWord(word)) {
             map.put(word, translation);
-            isValid=true;
+            isValid = true;
+            isModified=true;
         }
         return isValid;
     }
 
     public boolean removeWord(String word) {
         boolean find = map.containsKey(word);
-        if (find) map.remove(word);
+        if (find) {
+            map.remove(word);
+            isModified = true;
+        }
         return find;
     }
 
     public void readDictionary() {
-        for (Map.Entry entry : map.entrySet()) {
+        for (Map.Entry<String,String> entry : map.entrySet()) {
             ConsoleHelper.writeMessage(entry.toString());
         }
     }
@@ -64,7 +66,17 @@ public class DictionaryFile {
         return map.getOrDefault(word, null);
     }
 
-    private boolean isValidWord(String word) {
+    boolean isValidWord(@NotNull String word) {
         return false;
+    }
+
+    public void saveToFile() {
+        try (FileWriter fileWriter = new FileWriter(dictionarySource.toFile())) {
+            for (String word : map.keySet()) {
+                fileWriter.write(word + " " + map.get(word) + System.lineSeparator());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

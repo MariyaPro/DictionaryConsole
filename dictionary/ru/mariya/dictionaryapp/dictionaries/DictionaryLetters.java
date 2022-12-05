@@ -1,5 +1,7 @@
 package ru.mariya.dictionaryapp.dictionaries;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.nio.file.Path;
 
 public class DictionaryLetters extends DictionaryFile {
@@ -7,7 +9,7 @@ public class DictionaryLetters extends DictionaryFile {
         super(dictionarySource);
     }
 
-    public boolean isValidWord(String word) {
+     boolean isValidWord(@NotNull String word) {
         int length = 4;
         if (word.length() != length) return false;
         for (int i = 0; i < length; i++) {
