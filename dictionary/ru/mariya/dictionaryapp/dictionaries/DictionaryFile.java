@@ -61,10 +61,10 @@ public class DictionaryFile {
     }
 
     public String getTranslation(String word) {
-        return map.get(word);
+        return map.getOrDefault(word, null);
     }
 
-    public boolean isValidWord(String word) {
+    private boolean isValidWord(String word) {
         return false;
     }
 }
