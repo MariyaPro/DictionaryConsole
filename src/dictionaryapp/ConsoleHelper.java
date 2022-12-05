@@ -32,7 +32,7 @@ public class ConsoleHelper {
             case ("2") -> new PutCommand();
             case ("3") -> new RemoveCommand();
             case ("4") -> new GetCommand();
-            case ("exit") -> new ExitCommand();
+            case ("5") -> new ExitCommand();
             default -> null;
         };
 
