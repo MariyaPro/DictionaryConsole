@@ -1,9 +1,9 @@
 package ru.mariya.dictionaryapp;
 
 import ru.mariya.dictionaryapp.command.Command;
-import ru.mariya.dictionaryapp.dictionarys.DictionaryFile;
-import ru.mariya.dictionaryapp.dictionarys.DictionaryLetters;
-import ru.mariya.dictionaryapp.dictionarys.DictionaryNumbers;
+import ru.mariya.dictionaryapp.dictionaries.DictionaryFile;
+import ru.mariya.dictionaryapp.dictionaries.DictionaryLetters;
+import ru.mariya.dictionaryapp.dictionaries.DictionaryNumbers;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,7 +23,11 @@ public class ConsoleDictionaryApp {
         try {
             while (true) {
                 ConsoleHelper.writeMenu();
-                Command command = ConsoleHelper.getCommand();
+                Command command;
+                do {
+                    command = ConsoleHelper.getCommand();
+                    if(command==null) ConsoleHelper.writeMessage("Некорректный ввод. Попробуйте еще раз.");
+                } while (command == null);
                 command.execute();
             }
         } catch (ExitException e) {
@@ -36,11 +40,11 @@ public class ConsoleDictionaryApp {
         dictionaryList = new ArrayList<>();
         Properties properties = new Properties();
         try {
-            properties.load(new FileReader("C:\\Users\\Мария\\IdeaProjects\\DictionaryConsole\\dictionary\\ru\\mariya\\dictionaryapp\\pathDictionarysFilesSource"));
-            // properties.load(new FileReader(ConsoleDictionaryApp.class.getCanonicalName().replaceAll("\\.","\\")+"\\pathDictionarysFilesSourse"));
+            properties.load(new FileReader("C:\\Users\\Мария\\IdeaProjects\\DictionaryConsole\\dictionary\\ru\\mariya\\dictionaryapp\\pathDictionariesFilesSource"));
+            // properties.load(new FileReader(ConsoleDictionaryApp.class.getCanonicalName().replaceAll("\\.","\\")+"\\pathDictionariesFilesSourse"));
 
         } catch (IOException e) {
-            ConsoleHelper.writeMessage("Не найден файл pathDictionarysFilesSource");
+            ConsoleHelper.writeMessage("Не найден файл pathDictionariesFilesSource");
         }
         dictionaryList.add(new DictionaryLetters(Paths.get(properties.getProperty("dictionaryLetters"))));
         dictionaryList.add(new DictionaryNumbers(Paths.get(properties.getProperty("dictionaryNumbers"))));
@@ -51,9 +55,7 @@ public class ConsoleDictionaryApp {
     }
 
     private static void loadDictionary() {
-        for (DictionaryFile dic : dictionaryList) {
+        for (DictionaryFile dic : dictionaryList)
             dic.loadFromFile();
-            System.out.println(dic.getMap().size());
-        }
     }
 }

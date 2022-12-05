@@ -6,6 +6,8 @@ import java.io.*;
 import java.util.Scanner;
 
 public class ConsoleHelper {
+   private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
     public static void writeMessage(String message) {
         System.out.println(message);
     }
@@ -13,27 +15,26 @@ public class ConsoleHelper {
     public static String readMessage() {
         String str = null;
         do {
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            try  {
                 str = br.readLine();
             } catch (IOException e) {
                 System.out.println("Некорректный ввод. Попробуйте еще раз.");
-            }
+           }
         } while (str == null);
         return str;
     }
 
-    public static Command getCommand() throws ExitException {
-        Scanner scanner = new Scanner(System.in);
-        int command = scanner.nextInt();
-        switch (command){
-            case (1): return new ReadCommand();
-            case (2): return new PutCommand();
-            case (3): return new RemoveCommand();
-            case (4): return new GetCommand();
-            case (5): return new ExitCommand();
-        }
+    public static Command getCommand() {
+        String commandStr = readMessage();
+        return switch (commandStr) {
+            case ("1") -> new ReadCommand();
+            case ("2") -> new PutCommand();
+            case ("3") -> new RemoveCommand();
+            case ("4") -> new GetCommand();
+            case ("5") -> new ExitCommand();
+            default -> null;
+        };
 
-        return new ExitCommand();
     }
 
     public static void writeMenu() {

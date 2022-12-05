@@ -1,4 +1,4 @@
-package ru.mariya.dictionaryapp.dictionarys;
+package ru.mariya.dictionaryapp.dictionaries;
 
 import ru.mariya.dictionaryapp.ConsoleHelper;
 
@@ -39,8 +39,13 @@ public class DictionaryFile {
         return map;
     }
 
-    public void putWord(String word, String translation) {
-        if (isValidWord(word)) map.put(word, translation);
+    public boolean putWord(String word, String translation) {
+        boolean isValid = false;
+        if (isValidWord(word)) {
+            map.put(word, translation);
+            isValid=true;
+        }
+        return isValid;
     }
 
     public boolean removeWord(String word) {

@@ -2,7 +2,7 @@ package ru.mariya.dictionaryapp.command;
 
 import ru.mariya.dictionaryapp.ConsoleDictionaryApp;
 import ru.mariya.dictionaryapp.ConsoleHelper;
-import ru.mariya.dictionaryapp.dictionarys.DictionaryFile;
+import ru.mariya.dictionaryapp.dictionaries.DictionaryFile;
 
 import java.util.List;
 
@@ -20,7 +20,6 @@ public class RemoveCommand implements Command {
                 break;
             }
         }
-        if (find) ConsoleHelper.writeMessage("Слово удалено.");
-        else ConsoleHelper.writeMessage("Слово не найдено в словаре.");
+        ConsoleHelper.writeMessage(find ? "Слово удалено." : "Слово не найдено в словаре.");
     }
 }

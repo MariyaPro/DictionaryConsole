@@ -1,4 +1,4 @@
-package ru.mariya.dictionaryapp.dictionarys;
+package ru.mariya.dictionaryapp.dictionaries;
 
 import java.nio.file.Path;
 
