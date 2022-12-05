@@ -1,4 +1,4 @@
-package ru.mariya.dictionaryapp.dictionaries;
+package dictionaryapp.dictionaries;
 
 import org.jetbrains.annotations.NotNull;
 

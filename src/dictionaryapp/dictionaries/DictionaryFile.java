@@ -1,7 +1,7 @@
-package ru.mariya.dictionaryapp.dictionaries;
+package dictionaryapp.dictionaries;
 
+import dictionaryapp.ConsoleHelper;
 import org.jetbrains.annotations.NotNull;
-import ru.mariya.dictionaryapp.ConsoleHelper;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -25,7 +25,7 @@ public class DictionaryFile {
             BufferedReader br = new BufferedReader(new FileReader(dictionarySource.toFile()));
             while (br.ready()) {
                 String line = br.readLine();
-                String[] words = line.split(" ", 2);
+                String[] words = line.split("=");
                 map.put(words[0], words[1]);
             }
         } catch (IOException e) {
@@ -42,7 +42,7 @@ public class DictionaryFile {
         if (isValidWord(word)) {
             map.put(word, translation);
             isValid = true;
-            isModified=true;
+            isModified = true;
         }
         return isValid;
     }
@@ -57,8 +57,8 @@ public class DictionaryFile {
     }
 
     public void readDictionary() {
-        for (Map.Entry<String,String> entry : map.entrySet()) {
-            ConsoleHelper.writeMessage(entry.toString());
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            ConsoleHelper.writeMessage(entry.getKey() + " = " + entry.getValue());
         }
     }
 
@@ -73,7 +73,7 @@ public class DictionaryFile {
     public void saveToFile() {
         try (FileWriter fileWriter = new FileWriter(dictionarySource.toFile())) {
             for (String word : map.keySet()) {
-                fileWriter.write(word + " " + map.get(word) + System.lineSeparator());
+                fileWriter.write(word + "=" + map.get(word) + System.lineSeparator());
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

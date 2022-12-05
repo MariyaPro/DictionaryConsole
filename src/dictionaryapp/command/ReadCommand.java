@@ -1,7 +1,7 @@
-package ru.mariya.dictionaryapp.command;
+package dictionaryapp.command;
 
-import ru.mariya.dictionaryapp.ConsoleDictionaryApp;
-import ru.mariya.dictionaryapp.dictionaries.DictionaryFile;
+import dictionaryapp.ConsoleDictionaryApp;
+import dictionaryapp.dictionaries.DictionaryFile;
 
 import java.util.List;
 

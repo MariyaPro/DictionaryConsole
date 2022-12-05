@@ -1,6 +1,6 @@
-package ru.mariya.dictionaryapp;
+package dictionaryapp;
 
-import ru.mariya.dictionaryapp.command.*;
+import dictionaryapp.command.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class ConsoleHelper {
         return str;
     }
 
-    public static Command getCommand(){
+    public static Command getCommand() {
         String commandStr = readMessage();
         return switch (commandStr) {
             case ("1") -> new ReadCommand();
@@ -43,7 +43,7 @@ public class ConsoleHelper {
         System.out.println("2 - Добавить слово в словарь.");
         System.out.println("3 - Удалить слово из словаря.");
         System.out.println("4 - Перевести слово.");
-        System.out.println("exit - Завершение работы.");
+        System.out.println("5 - Завершение работы.");
         System.out.println("Введите номер команды:");
     }
 }

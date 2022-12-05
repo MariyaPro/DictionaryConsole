@@ -1,4 +1,4 @@
-package ru.mariya.dictionaryapp.command;
+package dictionaryapp.command;
 
 public interface Command {
     void execute();

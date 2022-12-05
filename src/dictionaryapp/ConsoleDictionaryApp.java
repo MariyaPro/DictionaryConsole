@@ -1,9 +1,9 @@
-package ru.mariya.dictionaryapp;
+package dictionaryapp;
 
-import ru.mariya.dictionaryapp.command.Command;
-import ru.mariya.dictionaryapp.dictionaries.DictionaryFile;
-import ru.mariya.dictionaryapp.dictionaries.DictionaryLetters;
-import ru.mariya.dictionaryapp.dictionaries.DictionaryNumbers;
+import dictionaryapp.command.Command;
+import dictionaryapp.dictionaries.DictionaryLetters;
+import dictionaryapp.dictionaries.DictionaryNumbers;
+import dictionaryapp.dictionaries.DictionaryFile;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -36,9 +36,8 @@ public class ConsoleDictionaryApp {
         dictionaryList = new ArrayList<>();
         Properties properties = new Properties();
         try {
-            properties.load(new FileReader("C:\\Users\\Мария\\IdeaProjects\\DictionaryConsole\\dictionary\\ru\\mariya\\dictionaryapp\\pathDictionariesFilesSource"));
-            // properties.load(new FileReader(ConsoleDictionaryApp.class.getCanonicalName().replaceAll("\\.","\\")+"\\pathDictionariesFilesSource"));
-
+          // properties.load(new FileReader("C:\\Users\\Мария\\IdeaProjects\\DictionaryConsole\\dictionary\\ru\\mariya\\dictionaryapp\\pathDictionariesFilesSource"));
+             properties.load(new FileReader("resources/pathDictionariesFilesSource"));
         } catch (IOException e) {
             ConsoleHelper.writeMessage("Не найден файл pathDictionariesFilesSource");
         }
